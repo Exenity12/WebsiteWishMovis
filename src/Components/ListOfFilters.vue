@@ -34,7 +34,6 @@ import { mapActions, mapGetters } from 'vuex';
         methods: {
             ...mapActions(["SortFIlmByName", "SortFIlmByYear", "updataMainListFilms", "fetchFilm"]),
             checkName() {
-                console.log(this.clonListAllFilm)
                 if((this.checkedName === true && true === this.checkedYear)) this.checkedYear = !this.checkedYear;
                 if((this.checkedName === false && false === this.checkedYear)) {
                     this.fetchFilm();
@@ -45,8 +44,7 @@ import { mapActions, mapGetters } from 'vuex';
                 }
             },
             checkYear() {
-                console.log(this.clonListAllFilm)
-                if((this.checkedName === true && true === this.checkedYear)) this.checkedName = !this.checkedName;this.checkedName;
+                if((this.checkedName === true && true === this.checkedYear)) this.checkedName = !this.checkedName;
                 if((this.checkedName === false && false === this.checkedYear)) {
                     this.fetchFilm();
                 }

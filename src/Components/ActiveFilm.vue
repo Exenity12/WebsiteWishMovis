@@ -3,31 +3,35 @@
         <appHeader />
         <div class="Main-Content">
             <BackToList />
-            <div class="Film-List__Film-Information"> 
-                <div class="Film-List__Film-Information__Logo">
-                    <div class="Film-List__Film-Information__Logo__Logo-Film">
-                        <!-- <img v-bind:src=item.poster alt="alt" class="Film-List__Film-Information__Logo__Logo-Film__Poster"/> -->
+            <div class="Film-Information"> 
+                <div class="Film-Information__Logo">
+                    <div class="Film-Information__Logo__Logo-Film">
+                        <!-- <img v-bind:src=item.poster alt="alt" class="Film-Information__Logo__Logo-Film__Poster"/> -->
                     </div>
                 </div>
-                <div class="Film-List__Film-Information__Text-Information">
-                    <!-- <h2 class="Film-List__Film-Information__Text-Information__Name-Film" v-bind:id=item.id>{{item.title}}</h2> -->
-                    <!-- <h4 class="Film-List__Film-Information__Text-Information__Year-Genres">
-                        {{item.year}}
-                        <div v-for="genres in item.genres" :key="genres">, {{genres}}</div>
-                    </h4> -->
-                    <h4 class="Film-List__Film-Information__Text-Information__Director">
-                        РЕЖИССЕР:
-                        <!-- <div v-for="directors in item.directors" :key="directors">{{directors}}</div> -->
+                <div class="Film-Information__Text-Information">
+                    <h2 class="Film-Information__Text-Information__Name-Film" v-bind:id=this.getActiveFilm.id>{{this.getActiveFilm.title}}</h2>
+                    <h4 class="Film-Information__Text-Information__Year-Genres">
+                        {{this.getActiveFilm.year}}
+                        <div v-for="genres in this.getActiveFilm.genres" :key="genres">, {{genres}}</div>
                     </h4>
-                    <div class="Film-List__Film-Information__Text-Information__Acters">
-                        <h4 class="Film-List__Film-Information__Text-Information__Acters__Name">АКТЕРЫ:</h4>
-                        <div class="Film-List__Film-Information__Text-Information__Acters__Bottom">
-                            <!-- <h5 class="Film-List__Film-Information__Text-Information__Acters__Item" v-for="actors in item.actors" :key="actors">
+                    <h4 class="Film-Information__Text-Information__Director">
+                        РЕЖИССЕР:
+                        <div 
+                            class="Text-Information__Director__Name" 
+                            v-for="directors in this.getActiveFilm.directors" :key="directors">
+                            {{directors}}
+                        </div>
+                    </h4>
+                    <div class="Film-Information__Text-Information__Acters">
+                        <h4 class="Film-Information__Text-Information__Acters__Name">АКТЕРЫ:</h4>
+                        <div class="Film-Information__Text-Information__Acters__Bottom">
+                            <h5 class="Film-Information__Text-Information__Acters__Item" v-for="actors in this.getActiveFilm.actors" :key="actors">
                                 {{actors}}
-                            </h5> -->
+                            </h5>
                         </div>
                     </div>
-                    <!-- <h3 class="Film-List__Film-Information__Text-Information__About">{{item.description}}</h3> -->
+                    <h3 class="Film-Information__Text-Information__About">{{this.getActiveFilm.description}}</h3>
                 </div>
             </div>
         </div>
@@ -39,96 +43,11 @@ import { mapGetters } from 'vuex';
     import BackToList from './BackToList.vue';
     export default {
         computed: mapGetters(["getActiveFilm"]),
-        components: { AppHeader, BackToList }
+        components: { AppHeader, BackToList },
+        data(){
+            return {
+                item: this.getActiveFilm
+            }
+        },
     };
 </script>
-<style>
-  .Film-List__Film-Information{
-        display: flex;
-        width: 100%;
-        background-color: #4D4747;
-        margin-bottom: 16px;
-    }
-
-    .Film-List__Film-Information__Logo {
-        width: 168px;
-        min-height: 168px;
-        background-color: #E5E5E5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Film-List__Film-Information__Logo__Logo-Film {
-        width: 112px;
-        height: 168px;
-    }
-
-    .Film-List__Film-Information__Logo__Logo-Film__Poster {
-        width: 100%;
-        height: 100%;
-    }
-
-    .Film-List__Film-Information__Text-Information {
-        margin: 32px 0px 34px 24px; 
-        width: 80%;
-    }
-
-    .Film-List__Film-Information__Text-Information__Name-Film {
-        font-family: sans-serif;
-        font-style: normal;
-        margin: 0px 0px 5px 0px; 
-        color: #FFFFFF;
-    }
-
-    .Film-List__Film-Information__Text-Information__Year-Genres {
-        font-family: sans-serif;
-        font-style: normal;
-        margin: 5px 0px 3px 0px; 
-        color: #988F8F;
-        display: flex;
-    }
-
-    .Film-List__Film-Information__Text-Information__Director {
-        font-family: sans-serif;
-        font-style: normal;
-        margin: 5px 0px 3px 0px; 
-        color: #988F8F;
-        display: flex;
-    }
-
-    .Film-List__Film-Information__Text-Information__Acters {
-        font-family: sans-serif;
-        font-style: normal;
-        display: flex;
-        margin-top: 5px;
-    }
-
-    .Film-List__Film-Information__Text-Information__Acters__Name{
-        font-family: sans-serif;
-        font-style: normal;
-        margin: 0px 0px 3px 0px; 
-        color: #988F8F;
-    }
-
-    .Film-List__Film-Information__Text-Information__Acters__Bottom{
-        max-width: 900px;
-    }
-
-    .Film-List__Film-Information__Text-Information__Acters__Item{
-        font-family: sans-serif;
-        font-style: normal;
-        margin: 0px 10px 3px 0px; 
-        color: #FFFFFF;
-        float: left;
-        display: flex;
-        white-space: nowrap;
-    }
-
-    .Film-List__Film-Information__Text-Information__About{
-        margin: 5px 0px 3px 0px; 
-        color: #FFFFFF;
-        width: 80%;
-    }
-
-</style>

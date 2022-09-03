@@ -8,26 +8,19 @@ export default createStore({
     filmSortByName: [],
     clonListAllFilm: [],
     url: "https://floating-sierra-20135.herokuapp.com/api/movies",
-    // url: 'https://floating-sierra-20135.herokuapp.com/api/movie/368539'
     activeFilm: [],
   },
   getters: {
     getAllFilm(state) {
       return state.allFilms;
     },
-    getClonAllFilm(state) {
-      return state.clonListAllFilm;
-    },
-    getACtiveFilm(state) {
+    getActiveFilm(state) {
       return state.activeFilm;
     }
   },
   mutations: {
     updateAllFilm(state, item1){
       state.allFilms = item1;
-    },
-    updateClonAllFilm(state, item2){
-      state.clonListAllFilm = item2;
     },
     updateActiveFilm(state, item3){
       state.activeFilm =item3;
@@ -43,11 +36,9 @@ export default createStore({
         .catch(error => console.log(error));
     },
     SortFIlmByName(ctx, arr) {
-      ctx.commit("updateClonAllFilm", this.state.allFilms)
       ctx.commit("updateAllFilm", arr)
     },
     SortFIlmByYear(ctx, arr) {
-      ctx.commit("updateClonAllFilm", this.state.allFilms)
       ctx.commit("updateAllFilm", arr)
     },
     updataMainListFilms(ctx) {

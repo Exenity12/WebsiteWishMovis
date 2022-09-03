@@ -22,12 +22,18 @@
                 </h4>
                 <h4 class="Film-Information__Text-Information__Director">
                     РЕЖИССЕР:
-                    <div class="Text-Information__Director__Name" v-for="directors in item.directors" :key="directors">{{directors}}</div>
+                    <div
+                        class="Text-Information__Director__Name" 
+                        v-for="directors in item.directors" :key="directors">
+                        {{directors}}
+                    </div>
                 </h4>
                 <div class="Film-Information__Text-Information__Acters">
                     <h4 class="Film-Information__Text-Information__Acters__Name">АКТЕРЫ:</h4>
                     <div class="Film-Information__Text-Information__Acters__Bottom">
-                        <h5 class="Film-Information__Text-Information__Acters__Item" v-for="actors in item.actors" :key="actors">
+                        <h5 
+                            class="Film-Information__Text-Information__Acters__Item" 
+                            v-for="actors in item.actors" :key="actors">
                             {{actors}}
                         </h5>
                     </div>
@@ -50,12 +56,6 @@
       mounted() {
         this.fetchFilm();
       },
-      data(){
-            return {
-                mouseOver: 0,
-                mouseOut: 0,
-            }
-        },
     };
 </script>
 <style>

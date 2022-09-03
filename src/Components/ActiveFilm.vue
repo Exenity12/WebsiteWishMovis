@@ -44,10 +44,5 @@ import { mapGetters } from 'vuex';
     export default {
         computed: mapGetters(["getActiveFilm"]),
         components: { AppHeader, BackToList },
-        data(){
-            return {
-                item: this.getActiveFilm
-            }
-        },
     };
 </script>

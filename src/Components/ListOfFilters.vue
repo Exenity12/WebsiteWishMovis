@@ -21,26 +21,24 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
     export default {
-        computed: mapGetters(["getAllFilm", "getClonAllFilm"]),
+        computed: mapGetters(["getAllFilm"]),
         data(){
             return {
                 checkedName: false,
                 checkedYear: false,
-                clonListAllFilm: this.getClonAllFilm,
-                arrName: [],
-                arrYaer: [],
+                newArrayFilm: [],
             }
         },
         methods: {
-            ...mapActions(["SortFIlmByName", "SortFIlmByYear", "updataMainListFilms", "fetchFilm"]),
+            ...mapActions(["SortArrayFilms", "updataMainListFilms", "fetchFilm"]),
             checkName() {
                 if((this.checkedName === true && true === this.checkedYear)) this.checkedYear = !this.checkedYear;
                 if((this.checkedName === false && false === this.checkedYear)) {
                     this.fetchFilm();
                 }
                 if(this.checkedName === true) {
-                    this.arrName = this.getAllFilm.sort((a, b) => a.title.localeCompare(b.title))
-                    this.SortFIlmByName(this.arrName);
+                    this.newArrayFilm = this.getAllFilm.sort((a, b) => a.title.localeCompare(b.title))
+                    this.SortArrayFilms(this.newArrayFilm);
                 }
             },
             checkYear() {
@@ -49,42 +47,39 @@ import { mapActions, mapGetters } from 'vuex';
                     this.fetchFilm();
                 }
                 if(true === this.checkedYear) {
-                    this.arrYaer = this.getAllFilm.sort((a, b) => parseFloat(a.year) - parseFloat(b.year));
-                    this.SortFIlmByYear(this.arrYaer);
+                    this.newArrayFilm = this.getAllFilm.sort((a, b) => parseFloat(a.year) - parseFloat(b.year));
+                    this.SortArrayFilms(this.newArrayFilm);
                 }
             }
         },
     }
-    </script>
-<style>
+</script>
+<style lang="scss">
 
     .List-of-filters{
         display: flex;
         background-color: #363232;
         height: 20px;
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid #FFFFFF;
         margin-bottom: 40px;
         padding: 0px 0px 20px 0px;
     }
-
     .List-of-filters__Item {
         display: flex;
         margin-right: 10px;
         margin-right: 35px;
     }
-
     .List-of-filters__Item__Name {
         margin-top: 2px;
         color: #FFFFFF;
+        font-family: 'Roboto';
         font-family: sans-serif;
         font-style: normal;
         font-weight: 400;
     }
-
     .List-of-filters__Item__Checkbox{
         width: 15px;
         height: 15px;
         margin-right: 10px;
     }
-
 </style>

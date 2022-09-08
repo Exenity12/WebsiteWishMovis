@@ -1,44 +1,50 @@
 <template>
-    <div>
+    <div class="ActiveFilm">
         <BackToList />
         <div class="Film-Information"> 
             <div class="Film-Information__Logo">
                 <div class="Film-Information__Logo__Logo-Film">
-                    <!-- <img v-bind:src=item.poster alt="alt" class="Film-Information__Logo__Logo-Film__Poster"/> -->
+                    <!-- <img v-bind:src=this.getActiveFilm.poster alt="alt" class="Film-Information__Logo__Logo-Film__Poster"/> -->
                 </div>
             </div>
             <div class="Film-Information__Text-Information">
-                <h2 class="Film-Information__Text-Information__Name-Film" v-bind:id=this.getActiveFilm.id>{{this.getActiveFilm.title}}</h2>
-                <h4 class="Film-Information__Text-Information__Year-Genres">
-                    {{this.getActiveFilm.year}}
-                    <div v-for="genres in this.getActiveFilm.genres" :key="genres">, {{genres}}</div>
-                </h4>
-                <h4 class="Film-Information__Text-Information__Director">
-                    РЕЖИССЕР:
+                <div class="Title-Information">
                     <div 
-                        class="Text-Information__Director__Name" 
-                        v-for="directors in this.getActiveFilm.directors" :key="directors">
-                        {{directors}}
+                        class="Text-Information__Name-Film" >
+                        {{this.getActiveFilm.title}}
                     </div>
-                </h4>
-                <div class="Film-Information__Text-Information__Acters">
-                    <h4 class="Film-Information__Text-Information__Acters__Name">АКТЕРЫ:</h4>
-                    <div class="Film-Information__Text-Information__Acters__Bottom">
-                        <h5 class="Film-Information__Text-Information__Acters__Item" v-for="actors in this.getActiveFilm.actors" :key="actors">
-                            {{actors}}
-                        </h5>
-                    </div>
+                    <!-- <div class="Duration" v-if="true">
+                        <div class="Duration-Info">
+                            <div
+                                class="Duration-Text"
+                                v-for="duration in this.getActiveFilm.collapse.duration" :key="duration">
+                                {{duration}}:00
+                            </div>
+                            <div class="Mini-Logo"></div>
+                        </div>
+                    </div> -->
                 </div>
-                <h3 class="Film-Information__Text-Information__About">{{this.getActiveFilm.description}}</h3>
+                <GenresYearActors :item="this.getActiveFilm"/>
             </div>
         </div>
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+    import GenresYearActors from "./GenresYearActors.vue"
+    import { mapGetters } from 'vuex';
     import BackToList from './BackToList.vue';
+
     export default {
         computed: mapGetters(["getActiveFilm"]),
-        components: {  BackToList },
+        components: {  BackToList, GenresYearActors },
     };
+
 </script>
+<style lang="scss">
+
+    .ActiveFilm {
+        height: 819px;
+        width: 100%;
+    }
+
+</style>

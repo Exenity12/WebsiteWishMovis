@@ -1,14 +1,13 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
 
+const url = "https://floating-sierra-20135.herokuapp.com/api/movies";
+
 export default createStore({
   state: {
     allFilms: [],
-    filmSortByYear: [],
-    filmSortByName: [],
-    clonListAllFilm: [],
-    url: "https://floating-sierra-20135.herokuapp.com/api/movies",
     activeFilm: [],
+    loadStatus: true,
   },
   getters: {
     getAllFilm(state) {
@@ -16,11 +15,17 @@ export default createStore({
     },
     getActiveFilm(state) {
       return state.activeFilm;
-    }
+    },
+    getLoaderStatus(state) {
+      return state.loadStatus;
+    },
   },
   mutations: {
-    updateAllFilm(state, item1){
-      state.allFilms = item1;
+    updateAllFilm(state, films){
+      state.allFilms = films;
+    },
+    updateLoadStatus(state) {
+      state.loadStatus = false;
     },
     updateActiveFilm(state, item3){
       state.activeFilm =item3;
@@ -29,24 +34,19 @@ export default createStore({
   actions: {
     async fetchFilm(ctx){
       axios
-        .get(this.state.url)
+        .get(url)
         .then(response => {
           ctx.commit("updateAllFilm", response.data.data)
+          ctx.commit("updateLoadStatus")
         })
         .catch(error => console.log(error));
     },
-    SortFIlmByName(ctx, arr) {
+    SortArrayFilms(ctx, arr) {
       ctx.commit("updateAllFilm", arr)
-    },
-    SortFIlmByYear(ctx, arr) {
-      ctx.commit("updateAllFilm", arr)
-    },
-    updataMainListFilms(ctx) {
-      ctx.commit("updateAllFilm", this.state.clonListAllFilm)
     },
     updateActiveFilm(ctx, item) {
       ctx.commit("updateActiveFilm", item)
-    }
+    },
   },
   modules: {
   }

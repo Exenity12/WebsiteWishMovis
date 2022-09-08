@@ -5,7 +5,7 @@ import ActiveFilm from "@/Components/ActiveFilm.vue"
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
+    name: 'MainPage',
     component: MainPage
   },
   {

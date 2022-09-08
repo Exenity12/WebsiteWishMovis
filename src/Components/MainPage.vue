@@ -1,28 +1,30 @@
 <template>
     <h1 class="Main-Content__Name">Фильмы</h1>
     <ListOfFilters />
+    <AppLoader v-if="getLoaderStatus"/>
     <FilmList />
 </template>
+<script>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import AppHeader from './AppHeader.vue';
-import ListOfFilters from './ListOfFilters.vue';
-import FilmList from './FilmList.vue';
+    import ListOfFilters from './ListOfFilters.vue';
+    import FilmList from './FilmList.vue';
+    import AppLoader from './AppLoader.vue'
+    import { mapGetters } from 'vuex';
 
-@Options({
-  components: {
-    AppHeader, ListOfFilters, FilmList
-  },
-})
-export default class HomeView extends Vue {}
+    export default {
+      computed: mapGetters(["getLoaderStatus"]),
+      components: {
+        ListOfFilters, FilmList, AppLoader,
+      },
+    };
+
 </script>
-<style>
+<style lang="scss">
 
-    .Main-Content__Name {
-        color: #FFFFFF;
-        font-family: 'Roboto';
-        font-style: normal;
-    }
+  .Main-Content__Name {
+    color: #FFFFFF;
+    font-family: 'Roboto';
+    font-style: normal;
+  }
 
 </style>

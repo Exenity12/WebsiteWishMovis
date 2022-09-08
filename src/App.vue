@@ -3,40 +3,43 @@
   <div class="Main-Content">
     <router-view/>
   </div>
+  <div class="Footer"></div>
 </template>
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import AppHeader from './Components/AppHeader.vue';
-import ListOfFilters from './Components/ListOfFilters.vue';
-import FilmList from './Components/FilmList.vue';
-
-@Options({
-components: {
-  AppHeader, ListOfFilters, FilmList
-},
-})
-export default class HomeView extends Vue {}
+<script>
+  import AppHeader from './Components/AppHeader.vue';
+  import { mapActions } from 'vuex';
+  export default {
+    components: {AppHeader},
+    methods: {
+      ...mapActions(["fetchFilm"]),
+    },
+    mounted() { 
+      this.fetchFilm();
+    },
+  }
 </script>
-<style>
+<style lang="scss">
+
+  $colorBackground: #363232;
+
   body {
     margin: 0px 0px 0px 0px;
   }
 
   #app {
-    background-color: #363232;
-    min-height: 1000px;
+    background-color: $colorBackground;
   }
 
   .Main-Content {
-    margin-left: 15%;
+    margin-left: auto;
+    margin-right: auto;
     width: 70%;
-    background-color: #363232;
+    background-color: $colorBackground;
   }
 
-  .Main-Content__Name {
-    color: #FFFFFF;
-    font-family: 'Roboto';
-    font-style: normal;
+  .Footer {
+    height: 50px;
+    background-color: #FA2828;
   }
 
 </style>
